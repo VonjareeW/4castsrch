@@ -118,7 +118,7 @@ let savepriorSearch = function (city) {
     if(!priorSearch.includes(city)){
         priorSearch.push(city);
         $("#search-history").append("<a href='#' class='list-group-item list-group-item-action' id='" + city + "'>" + city + "</a>")
-    } 
+    };
 
     localStorage.setItem("weatherpriorSearch", JSON.stringify(priorSearch));
     localStorage.setItem("previouscity", JSON.stringify(previouscity));
@@ -133,11 +133,11 @@ let loadpriorSearch = function() {
   
     
     if (!priorSearch) {
-        priorSearch = []
+        priorSearch = [];
     }
 
     if (!previouscity) {
-        previouscity = ""
+        previouscity = "";
     }
 
     $("#search-history").empty();
