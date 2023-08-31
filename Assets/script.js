@@ -1,5 +1,5 @@
 let priorSearch = []
-let prevCity = ""
+let previousCity = ""
 
 // api link to openweather, format the OpenWeather api url with own apikey
 let getCityWeather = function(city) {
