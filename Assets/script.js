@@ -1,5 +1,8 @@
-let priorSearch = []
+
+let searchHistory = []
 let previousCity = ""
+
+
 
 // api link to openweather, format the OpenWeather api url with own apikey
 let getCityWeather = function(city) {
@@ -88,7 +91,7 @@ let displayWeather = function(weatherData) {
                 $("#five-day").empty();
 
                 // get every 8th value  from the api call
-                for(i = 7; i < data.list.length; i += 8){
+                for(i = 7; i <= data.list.length; i += 8){
 
                     // insert data into my day forecast card template
                     let fiveDayCard =`
@@ -110,58 +113,59 @@ let displayWeather = function(weatherData) {
 
     // save the last city searched
     previousCity = weatherData.name;
-
+    savepriorSearch(weatherData.name);
 };
 
 // function to save the city search history to local storage
 let savepriorSearch = function (city) {
-    if(!priorSearch.includes(city)){
-        priorSearch.push(city);
+    if(!searchHistory.includes(city)){
+        searchHistory.push(city);
         $("#search-history").append("<a href='#' class='list-group-item list-group-item-action' id='" + city + "'>" + city + "</a>")
-    };
+    } 
 
-    localStorage.setItem("weatherpriorSearch", JSON.stringify(priorSearch));
-    localStorage.setItem("previouscity", JSON.stringify(previouscity));
+    localStorage.setItem("weathersearchHistory", JSON.stringify(searchHistory));
+    localStorage.setItem("previousCity", JSON.stringify(previousCity));
 
-    loadpriorSearch();
+    loadsearchHistory();
 };
 
 // load prior searches from saved city search history from local storage
-let loadpriorSearch = function() {
-    priorSearch = JSON.parse(localStorage.getItem("weatherpriorSearch"));
-    previouscity = JSON.parse(localStorage.getItem("previouscity"));
+let loadsearchHistory = function() {
+    searchHistory = JSON.parse(localStorage.getItem("weathersearchHistory"));
+    previousCity = JSON.parse(localStorage.getItem("previousCity"));
   
     
-    if (!priorSearch) {
-        priorSearch = [];
+    if (!searchHistory) {
+        searchHistory = []
     }
 
-    if (!previouscity) {
-        previouscity = "";
+    if (!previousCity) {
+        previousCity = ""
     }
 
     $("#search-history").empty();
 
-    for(i = 0 ; i < priorSearch.length ;i++) {
+    for(i = 0 ; i < searchHistory.length ;i++) {
 
         
-        $("#search-history").append("<a href='#' class='list-group-item list-group-item-action' id='" + priorSearch[i] + "'>" + priorSearch[i] + "</a>");
+        $("#search-history").append("<a href='#' class='list-group-item list-group-item-action' id='" + searchHistory[i] + "'>" + searchHistory[i] + "</a>");
     }
   };
 
 //  history from local storage
-loadpriorSearch();
+loadsearchHistory();
 
 // start page with prior city searched 
-if (previouscity != ""){
-    getCityWeather(previouscity);
+if (previousCity != ""){
+    getCityWeather(previousCity);
 }
 
 // event handlers
 $("#search-form").submit(searchSubmitHandler);
-$("#search-history").on("click", function(event){
-   
-    let prevCity = $(event.target).closest("a").attr("id");
-   
-    getCityWeather(prevCity);
+$("#search-history").on("click", "a", function(event) {
+    let selectedCity = $(event.target).attr("id");
+    getCityWeather(selectedCity);
 });
+
+
+savepriorSearch(previousCity);
