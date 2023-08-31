@@ -22,7 +22,7 @@ THEN I am again presented with current and future conditions for that city
 <img width="1440" alt="Screenshot 2023-08-31 at 3 27 24 PM" src="https://github.com/VonjareeW/4castsrch/assets/52430595/7a970097-4ab6-4602-b2fa-fc8678308e76">
 
 # Deployment
-[https://vonjareew.github.io/](https://vonjareew.github.io/4castsrch/)
+https://vonjareew.github.io/4castsrch/
 
 # Resources/Source Code
 I used class resources  UNCC-VIRT-FSF-PT-07-2023-U-LOLC/06-Server-Side-APIs/Main
