@@ -88,7 +88,7 @@ let displayWeather = function(weatherData) {
                 $("#five-day").empty();
 
                 // get every 8th value  from the api call
-                for(i = 7; i <= data.list.length; i += 8){
+                for(i = 7; i < data.list.length; i += 8){
 
                     // insert data into my day forecast card template
                     let fiveDayCard =`
@@ -109,7 +109,7 @@ let displayWeather = function(weatherData) {
         });
 
     // save the last city searched
-    previouscity = weatherData.name;
+    previousCity = weatherData.name;
 
 };
 
