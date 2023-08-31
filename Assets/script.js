@@ -52,7 +52,7 @@ let displayWeather = function(weatherData) {
 
     // format and display the values for cards 
     $("#cityName").text(weatherData.name + " (" + dayjs(weatherData.dt * 1000).format("MM/DD/YYYY") + ") ").append(`<img src="https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png"></img>`);
-    $("#cityTemp").text("Temperature: " + weatherData.main.temp.toFixed(1) + "°F");
+    $("#cityTemp").text("Temperature: " + Math.round(weatherData.main.temp) + "°F");
     $("#cityHumidity").text("Humidity: " + weatherData.main.humidity + "%");
     $("#cityWind").text("Wind Speed: " + weatherData.wind.speed.toFixed(1) + " mph");
 
@@ -96,7 +96,7 @@ let displayWeather = function(weatherData) {
                         <div class="card-body p-1">
                             <h5 class="card-title">` + dayjs(data.list[i].dt * 1000).format("MM/DD/YYYY") + `</h5>
                             <img src="https://openweathermap.org/img/wn/` + data.list[i].weather[0].icon + `.png" alt="rain">
-                            <p class="card-text">Temp: ` + data.list[i].main.temp + `  °F </p>
+                            <p class="card-text">Temp: ` + Math.round(data.list[i].main.temp) + `  °F </p>
                             <p class="card-text">Humidity: ` + data.list[i].main.humidity + ` % </p>
                         </div>
                     </div>
